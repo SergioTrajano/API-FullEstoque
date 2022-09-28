@@ -1,8 +1,8 @@
 import supertest from "supertest";
 
-import server from "../../server";
+import server from "../../src/server";
 import { factory } from "../factory";
-import client from "../../dbStrategy/postgres";
+import client from "../../src/dbStrategy/postgres";
 
 const app = supertest(server);
 
@@ -16,7 +16,7 @@ afterAll(async () => {
 
 describe("test authRoutes", () => {
 	it("return 201 and a object that cotanins userData", async () => {
-		const newUser = factory.createUser();
+		const newUser = await factory.createUser(false);
 
 		const result = await app.post("/signUp").send(newUser);
 
@@ -26,7 +26,7 @@ describe("test authRoutes", () => {
 	});
 
 	it("returns 409 for email in use", async () => {
-		const newUser = factory.createUser();
+		const newUser = await factory.createUser(false);
 
 		await app.post("/signUp").send(newUser);
 		const result = await app.post("/signUp").send(newUser);
