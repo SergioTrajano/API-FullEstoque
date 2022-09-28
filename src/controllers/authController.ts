@@ -4,10 +4,21 @@ import { createUser } from "../repositories/userRepository";
 
 import { userService } from "../services/userService";
 
-async function signUp(req: Request, res: Response) {
-	const newUserData: createUser = req.body;
+interface signUpBody {
+	name: string;
+	email: string;
+	password: string;
+	confirmPassword: string;
+}
 
-	const userData: User = await userService.insertUser(newUserData);
+async function signUp(req: Request, res: Response) {
+	const newUserData: signUpBody = req.body;
+
+	const userData: User = await userService.insertUser({
+		name: newUserData.name,
+		email: newUserData.email,
+		password: newUserData.password,
+	});
 
 	res.status(201).send(userData);
 }

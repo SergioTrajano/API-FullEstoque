@@ -9,6 +9,7 @@ export const signUpSchema = joi.object({
 		.trim()
 		.required(),
 	password: joi.string().trim().pattern(strongPasswordRegEx).required(),
+	confirmPassword: joi.string().trim().equal(joi.ref("password")).required(),
 	name: joi.string().trim().required(),
 });
 
