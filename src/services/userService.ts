@@ -6,7 +6,9 @@ async function insertUser(newUserData: createUser) {
 		throw errorType.conflict("Email");
 	}
 
-	await userRepository.create(newUserData);
+	const userData = await userRepository.create(newUserData);
+
+	return userData;
 }
 
 export const userService = {
