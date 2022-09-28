@@ -17,6 +17,7 @@ model User {
   name     String
 
   categories Category[]
+  clients    Client[]
 
   @@map("users")
 }
@@ -42,4 +43,16 @@ model Product {
   price       Decimal  @db.Decimal(7, 2)
 
   @@map("products")
+}
+
+model Client {
+  id          Int    @id @default(autoincrement())
+  userId      Int
+  user        User   @relation(fields: [userId], references: [id])
+  name        String
+  phoneNumber Int
+  CPF         String
+  RG          Int
+
+  @@map("clients")
 }
