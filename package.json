@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "app.js",
 	"scripts": {
-		"dev": "nodemon ./src/app.ts"
+		"dev": "nodemon ./src/app.ts",
+		"test:integration": "jest -i --no--cache --testPathPattern=tests/integration"
 	},
 	"keywords": [],
 	"author": "",
