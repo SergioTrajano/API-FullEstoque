@@ -26,10 +26,11 @@ model Category {
   id     Int    @id @default(autoincrement())
   userId Int
   user   User   @relation(fields: [userId], references: [id])
-  name   String @unique
+  name   String
 
   products Product[]
 
+  @@unique([userId, name])
   @@map("categories")
 }
 
