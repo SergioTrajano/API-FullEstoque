@@ -42,7 +42,7 @@ model Product {
   barcode     String
   price       Decimal  @db.Decimal(7, 2)
 
-  purchases Pruchase[]
+  purchases Purchase[]
 
   @@map("products")
 }
@@ -59,7 +59,7 @@ model Client {
   @@map("clients")
 }
 
-model Pruchase {
+model Purchase {
   id         Int      @id @default(autoincrement())
   productId  Int
   product    Product  @relation(fields: [productId], references: [id])
