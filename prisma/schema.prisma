@@ -27,5 +27,19 @@ model Category {
   user   User   @relation(fields: [userId], references: [id])
   name   String @unique
 
+  products Product[]
+
   @@map("categories")
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  name        String
+  description String
+  barcode     String
+  price       Decimal  @db.Decimal(7, 2)
+
+  @@map("products")
 }
