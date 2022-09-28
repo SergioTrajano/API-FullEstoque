@@ -43,6 +43,7 @@ model Product {
   price       Decimal  @db.Decimal(7, 2)
 
   purchases Purchase[]
+  sells     Sell[]
 
   @@map("products")
 }
@@ -56,6 +57,8 @@ model Client {
   CPF         String
   RG          Int
 
+  sells Sell[]
+
   @@map("clients")
 }
 
@@ -68,4 +71,17 @@ model Purchase {
   createdAt  DateTime @default(now())
 
   @@map("purchases")
+}
+
+model Sell {
+  id         Int      @id @default(autoincrement())
+  productId  Int
+  clientId   Int
+  client     Client   @relation(fields: [clientId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id])
+  quantity   Int
+  totalPrice Decimal  @db.Decimal(7, 2)
+  createdAt  DateTime @default(now())
+
+  @@map("sells")
 }
