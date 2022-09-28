@@ -18,7 +18,7 @@ async function getByEmail(userData: Omit<User, "id" | "name">) {
 	const dbUser = await userRepository.getByEmail(userData.email);
 
 	if (!dbUser || !comparePassword(userData.password, dbUser.password)) {
-		throw errorType.unathorized("crednetials!");
+		throw errorType.unathorized("credentials!");
 	}
 
 	const token = tokenManager.generateToken(dbUser.id);
