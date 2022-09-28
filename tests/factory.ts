@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import client from "../src/dbStrategy/postgres";
+import { encryptPassword } from "../src/utils/passwordEncrypter";
 
 async function createUser(bool: boolean) {
 	const user = {
@@ -9,7 +10,7 @@ async function createUser(bool: boolean) {
 	};
 
 	if (bool) {
-		await client.user.create({ data: user });
+		await client.user.create({ data: { ...user, password: encryptPassword(user.password) } });
 	}
 
 	return user;

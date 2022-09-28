@@ -8,7 +8,7 @@ import { faker } from "@faker-js/faker";
 const app = supertest(server);
 
 beforeEach(async () => {
-	await client.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY`;
+	await client.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`;
 });
 
 afterAll(async () => {
@@ -46,7 +46,7 @@ describe("test authRoutes", () => {
 	it("return 200 and a token /signIn", async () => {
 		const user = await factory.createUser(true);
 
-		const result = await app.post("signIn").send({ email: user.email, password: user.password });
+		const result = await app.post("/signIn").send({ email: user.email, password: user.password });
 
 		expect(result.status).toBe(200);
 		expect(result.body).toBeInstanceOf(Object);
@@ -55,7 +55,7 @@ describe("test authRoutes", () => {
 	it("return 422 for invalid body /signIn", async () => {
 		const user = {};
 
-		const result = await app.post("signIn").send(user);
+		const result = await app.post("/signIn").send(user);
 
 		expect(result.status).toBe(422);
 	});
@@ -63,7 +63,7 @@ describe("test authRoutes", () => {
 	it("return 401 for invalid credentials /signIn", async () => {
 		const user = await factory.createUser(true);
 
-		const result = await app.post("signIn").send({ email: faker.internet.email(), password: user.password });
+		const result = await app.post("/signIn").send({ email: faker.internet.email(), password: user.password });
 
 		expect(result.status).toBe(401);
 	});
