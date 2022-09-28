@@ -12,6 +12,15 @@ async function signUp(req: Request, res: Response) {
 	res.status(201).send(userData);
 }
 
+async function signIn(req: Request, res: Response) {
+	const userData: Omit<User, "id" | "name"> = req.body;
+
+	const token: string = await userService.getByEmail(userData);
+
+	res.status(200).send(token);
+}
+
 export const userController = {
 	signUp,
+	signIn,
 };
