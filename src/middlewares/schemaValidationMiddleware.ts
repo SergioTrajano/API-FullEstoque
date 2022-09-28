@@ -4,7 +4,7 @@ import { ObjectSchema } from "joi";
 import { errorType } from "../utils/errorTypes";
 
 export default function validateSchema(schema: ObjectSchema) {
-	(req: Request, res: Response, next: NextFunction) => {
+	return (req: Request, res: Response, next: NextFunction) => {
 		const data = req.body;
 
 		const { error } = schema.validate(data, { abortEarly: false });
