@@ -1,7 +1,7 @@
 import { User } from "@prisma/client";
 import client from "../dbStrategy/postgres";
 
-type createUser = Omit<User, "id">;
+export type createUser = Omit<User, "id">;
 
 async function create(newUserData: createUser) {
 	const userData: User = await client.user.create({ data: newUserData });
@@ -17,8 +17,15 @@ async function changePassword(id: number, newPassword: string) {
 	await client.user.update({ data: { password: newPassword }, where: { id } });
 }
 
+async function getByEmail(email: string) {
+	const dbUser = await client.user.findUnique({ where: { email } });
+
+	return dbUser;
+}
+
 export const userRepository = {
 	create,
 	deleteUser,
 	changePassword,
+	getByEmail,
 };
