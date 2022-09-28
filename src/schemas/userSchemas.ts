@@ -11,3 +11,12 @@ export const signUpSchema = joi.object({
 	password: joi.string().trim().pattern(strongPasswordRegEx).required(),
 	name: joi.string().trim().required(),
 });
+
+export const signInSchema = joi.object({
+	email: joi
+		.string()
+		.email({ tlds: { allow: false } })
+		.trim()
+		.required(),
+	password: joi.string().trim().required(),
+});
