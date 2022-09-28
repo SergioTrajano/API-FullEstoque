@@ -17,7 +17,7 @@ async function signIn(req: Request, res: Response) {
 
 	const token: string = await userService.getByEmail(userData);
 
-	res.status(200).send(token);
+	res.status(200).send({ token });
 }
 
 export const userController = {
