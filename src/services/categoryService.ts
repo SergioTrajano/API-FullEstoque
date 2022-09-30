@@ -30,7 +30,21 @@ async function update(dataToUpdate: createCategory, categoryId: number, userId: 
 	return updatedCatregory;
 }
 
+async function remove(categoryId: number, userId: number) {
+	const dbCategory = await categoryRepository.findById(categoryId);
+
+	if (!dbCategory) {
+		throw errorType.notFound("Category");
+	}
+	if (dbCategory.userId !== userId) {
+		throw errorType.forbbiden();
+	}
+
+	await categoryRepository.remove(categoryId);
+}
+
 export const categoryService = {
 	create,
 	update,
+	remove,
 };
