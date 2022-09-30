@@ -28,9 +28,14 @@ async function update(dataToUpdate: createCategory, categoryId: number) {
 	return updatedCategory;
 }
 
+async function remove(categoryId: number) {
+	await client.category.delete({ where: { id: categoryId } });
+}
+
 export const categoryRepository = {
 	create,
 	findByUserIdAndName,
 	findById,
 	update,
+	remove,
 };
