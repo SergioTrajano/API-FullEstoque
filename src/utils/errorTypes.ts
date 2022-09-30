@@ -2,6 +2,10 @@ function unathorized(entity: string) {
 	return { code: 401, message: `Invalid ${entity}.` };
 }
 
+function forbbiden() {
+	return { code: 403, message: "Permission denied!" };
+}
+
 function notFound(entity: string) {
 	return { code: 404, message: `${entity} not found.` };
 }
@@ -16,6 +20,7 @@ function unprocessableEntityError(error: { details: { message: String }[] }) {
 
 export const errorType = {
 	unathorized,
+	forbbiden,
 	notFound,
 	conflict,
 	unprocessableEntityError,
