@@ -32,10 +32,17 @@ async function remove(categoryId: number) {
 	await client.category.delete({ where: { id: categoryId } });
 }
 
+async function find(userId: number) {
+	const dbUserCategories = await client.category.findMany({ where: { userId } });
+
+	return dbUserCategories;
+}
+
 export const categoryRepository = {
 	create,
 	findByUserIdAndName,
 	findById,
 	update,
 	remove,
+	find,
 };
