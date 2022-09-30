@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 
+import { errorType } from "./errorTypes";
+
 const SECRET: string = String(process.env.JWT_SECRET);
 
 function generateToken(id: number) {
@@ -7,7 +9,11 @@ function generateToken(id: number) {
 }
 
 function readToken(token: string) {
-	return jwt.verify(token, SECRET);
+	try {
+		return jwt.verify(token, SECRET) as { id: number };
+	} catch {
+		throw errorType.unathorized("token");
+	}
 }
 
 export const tokenManager = {
