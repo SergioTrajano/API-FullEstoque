@@ -26,7 +26,18 @@ async function getByEmail(userData: Omit<User, "id" | "name">) {
 	return token;
 }
 
+async function getById(id: number) {
+	const dbUser = await userRepository.getById(id);
+
+	if (!dbUser) {
+		throw errorType.unathorized("user!");
+	}
+
+	return dbUser;
+}
+
 export const userService = {
 	insertUser,
 	getByEmail,
+	getById,
 };
