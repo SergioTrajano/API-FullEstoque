@@ -43,8 +43,15 @@ async function remove(categoryId: number, userId: number) {
 	await categoryRepository.remove(categoryId);
 }
 
+async function find(userId: number) {
+	const userCategories = await categoryRepository.find(userId);
+
+	return userCategories;
+}
+
 export const categoryService = {
 	create,
 	update,
 	remove,
+	find,
 };
