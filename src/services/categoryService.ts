@@ -15,6 +15,22 @@ async function create(newCategoryData: createCategory, id: number) {
 	return newCategory;
 }
 
+async function update(dataToUpdate: createCategory, categoryId: number, userId: number) {
+	const dbCategory = await categoryRepository.findById(categoryId);
+
+	if (!dbCategory) {
+		throw errorType.notFound("Category");
+	}
+	if (dbCategory.userId !== userId) {
+		throw errorType.forbbiden();
+	}
+
+	const updatedCatregory = await categoryRepository.update(dataToUpdate, categoryId);
+
+	return updatedCatregory;
+}
+
 export const categoryService = {
 	create,
+	update,
 };
