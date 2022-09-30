@@ -23,9 +23,16 @@ async function getByEmail(email: string) {
 	return dbUser;
 }
 
+async function getById(id: number) {
+	const dbUser = await client.user.findUnique({ where: { id } });
+
+	return dbUser;
+}
+
 export const userRepository = {
 	create,
 	deleteUser,
 	changePassword,
 	getByEmail,
+	getById,
 };
