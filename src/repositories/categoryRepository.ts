@@ -16,7 +16,21 @@ async function findByUserIdAndName(name: string, id: number) {
 	return userCategory;
 }
 
+async function findById(categoryId: number) {
+	const dbCategory = await client.category.findUnique({ where: { id: categoryId } });
+
+	return dbCategory;
+}
+
+async function update(dataToUpdate: createCategory, categoryId: number) {
+	const updatedCategory = await client.category.update({ where: { id: categoryId }, data: dataToUpdate });
+
+	return updatedCategory;
+}
+
 export const categoryRepository = {
 	create,
 	findByUserIdAndName,
+	findById,
+	update,
 };
