@@ -39,10 +39,17 @@ async function remove(id: number) {
 	await client.product.delete({ where: { id } });
 }
 
+async function find(userId: number) {
+	const userProducts = await client.product.findMany({ where: { userId } });
+
+	return userProducts;
+}
+
 export const productRepository = {
 	create,
 	findByBarcode,
 	findById,
 	update,
 	remove,
+	find,
 };
