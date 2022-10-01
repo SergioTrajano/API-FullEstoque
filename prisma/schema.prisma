@@ -16,8 +16,12 @@ model User {
   password String
   name     String
 
-  categories Category[]
-  clients    Client[]
+  categories    Category[]
+  clients       Client[]
+  products      Product[]
+  manufacturers Manufacturer[]
+  sells         Sell[]
+  purchases     Purchase[]
 
   @@map("users")
 }
@@ -36,6 +40,8 @@ model Category {
 
 model Product {
   id             Int          @id @default(autoincrement())
+  userId         Int
+  user           User         @relation(fields: [userId], references: [id])
   categoryId     Int
   category       Category     @relation(fields: [categoryId], references: [id])
   name           String
@@ -67,6 +73,8 @@ model Client {
 
 model Purchase {
   id         Int      @id @default(autoincrement())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
   productId  Int
   product    Product  @relation(fields: [productId], references: [id])
   quantity   Int
@@ -78,6 +86,8 @@ model Purchase {
 
 model Sell {
   id         Int      @id @default(autoincrement())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
   productId  Int
   clientId   Int
   client     Client   @relation(fields: [clientId], references: [id])
@@ -90,10 +100,13 @@ model Sell {
 }
 
 model Manufacturer {
-  id   Int    @id @default(autoincrement())
-  name String @unique
+  id     Int    @id @default(autoincrement())
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
+  name   String
 
   products Product[]
 
+  @@unique([userId, name])
   @@map("manufacturers")
 }
