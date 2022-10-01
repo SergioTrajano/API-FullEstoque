@@ -12,6 +12,17 @@ async function create(req: Request, res: Response) {
 	res.status(201).send(newManufacturer);
 }
 
+async function update(req: Request, res: Response) {
+	const manufacturerDataToUpdated: createManufacture = req.body;
+	const userId: number = res.locals.userId;
+	const manufacturerId = Number(req.params.manufacturerId);
+
+	const updatedManufacturer = await manufacturerService.update(manufacturerDataToUpdated, userId, manufacturerId);
+
+	res.status(200).send(updatedManufacturer);
+}
+
 export const manufacturerController = {
 	create,
+	update,
 };
