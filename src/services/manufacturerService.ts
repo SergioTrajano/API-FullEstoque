@@ -5,7 +5,7 @@ import { manufaturerRepository, createManufacture } from "../repositories/manufa
 async function create(newManufacturerData: createManufacture, userId: number) {
 	await userService.getById(userId);
 
-	const dbMaanufacturer = await manufaturerRepository.getByName(newManufacturerData.name);
+	const dbMaanufacturer = await manufaturerRepository.getByName(newManufacturerData.name, userId);
 
 	if (dbMaanufacturer) {
 		throw errorType.conflict("Manufacturer");
@@ -16,6 +16,28 @@ async function create(newManufacturerData: createManufacture, userId: number) {
 	return newManufacturer;
 }
 
+async function update(newManufacturerData: createManufacture, userId: number, manufacturerId: number) {
+	await userService.getById(userId);
+
+	const dbMaanufacturer = await manufaturerRepository.getById(manufacturerId);
+	const dbMaanufacturerByName = await manufaturerRepository.getByName(newManufacturerData.name, userId);
+
+	if (!dbMaanufacturer) {
+		throw errorType.notFound("Manufacturer");
+	}
+	if (dbMaanufacturerByName && manufacturerId !== dbMaanufacturerByName.id) {
+		throw errorType.conflict("Name");
+	}
+	if (dbMaanufacturer.userId !== userId) {
+		throw errorType.forbbiden();
+	}
+
+	const updatedManufacturer = await manufaturerRepository.update(newManufacturerData, manufacturerId);
+
+	return updatedManufacturer;
+}
+
 export const manufacturerService = {
 	create,
+	update,
 };
