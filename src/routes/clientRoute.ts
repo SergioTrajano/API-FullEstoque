@@ -8,4 +8,6 @@ const router = Router();
 
 router.post("/clients", validateSchema(createClientSchema), clientController.create);
 
+router.put("/clients/:clientId", validateSchema(createClientSchema), clientController.update);
+
 export default router;
