@@ -52,8 +52,17 @@ async function remove(userId: number, manufacturerId: number) {
 	await manufaturerRepository.remove(manufacturerId);
 }
 
+async function find(userId: number) {
+	await userService.getById(userId);
+
+	const userManufacturers = await manufaturerRepository.find(userId);
+
+	return userManufacturers;
+}
+
 export const manufacturerService = {
 	create,
 	update,
 	remove,
+	find,
 };
