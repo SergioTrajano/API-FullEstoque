@@ -12,6 +12,17 @@ async function create(req: Request, res: Response) {
 	res.status(201).send(newClient);
 }
 
+async function update(req: Request, res: Response) {
+	const updateClientData: createClient = req.body;
+	const userId: number = res.locals.userId;
+	const clientId: number = Number(req.params.clientId);
+
+	const updatedClient = await clientService.update(updateClientData, userId, clientId);
+
+	res.status(200).send(updatedClient);
+}
+
 export const clientController = {
 	create,
+	update,
 };
