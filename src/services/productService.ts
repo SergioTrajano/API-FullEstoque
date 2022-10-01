@@ -67,8 +67,17 @@ async function remove(userId: number, productId: number) {
 	await productRepository.remove(productId);
 }
 
+async function find(userId: number) {
+	await userService.getById(userId);
+
+	const userProducts = await productRepository.find(userId);
+
+	return userProducts;
+}
+
 export const productService = {
 	create,
 	update,
 	remove,
+	find,
 };
