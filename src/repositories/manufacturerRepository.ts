@@ -33,10 +33,17 @@ async function remove(id: number) {
 	await client.manufacturer.delete({ where: { id } });
 }
 
+async function find(userId: number) {
+	const dbUserManufacturers = await client.manufacturer.findMany({ where: { userId } });
+
+	return dbUserManufacturers;
+}
+
 export const manufaturerRepository = {
 	create,
 	getByName,
 	getById,
 	update,
 	remove,
+	find,
 };
