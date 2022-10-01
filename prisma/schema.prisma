@@ -35,13 +35,15 @@ model Category {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  categoryId  Int
-  category    Category @relation(fields: [categoryId], references: [id])
-  name        String
-  description String
-  barcode     String
-  price       Decimal  @db.Decimal(7, 2)
+  id             Int          @id @default(autoincrement())
+  categoryId     Int
+  category       Category     @relation(fields: [categoryId], references: [id])
+  name           String
+  description    String
+  barcode        String
+  price          Decimal      @db.Decimal(7, 2)
+  manufacturerId Int
+  manufacturer   Manufacturer @relation(fields: [manufacturerId], references: [id])
 
   purchases Purchase[]
   sells     Sell[]
@@ -85,4 +87,13 @@ model Sell {
   createdAt  DateTime @default(now())
 
   @@map("sells")
+}
+
+model Manufacturer {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  products Product[]
+
+  @@map("manufacturers")
 }
