@@ -69,6 +69,7 @@ model Client {
 
   sells Sell[]
 
+  @@unique([CPF, userId])
   @@map("clients")
 }
 
