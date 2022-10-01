@@ -12,6 +12,17 @@ async function create(req: Request, res: Response) {
 	res.status(201).send(newProduct);
 }
 
+async function update(req: Request, res: Response) {
+	const userId: number = res.locals.userId;
+	const updateProductData: createProduct = req.body;
+	const productId: number = Number(req.params.productId);
+
+	const updatedProduct = await productService.update(userId, updateProductData, productId);
+
+	res.status(200).send(updatedProduct);
+}
+
 export const productController = {
 	create,
+	update,
 };
