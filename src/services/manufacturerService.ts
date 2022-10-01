@@ -37,7 +37,23 @@ async function update(newManufacturerData: createManufacture, userId: number, ma
 	return updatedManufacturer;
 }
 
+async function remove(userId: number, manufacturerId: number) {
+	await userService.getById(userId);
+
+	const dbMaanufacturer = await manufaturerRepository.getById(manufacturerId);
+
+	if (!dbMaanufacturer) {
+		throw errorType.notFound("Manufacturer");
+	}
+	if (dbMaanufacturer.userId !== userId) {
+		throw errorType.forbbiden();
+	}
+
+	await manufaturerRepository.remove(manufacturerId);
+}
+
 export const manufacturerService = {
 	create,
 	update,
+	remove,
 };
