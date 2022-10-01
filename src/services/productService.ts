@@ -53,7 +53,22 @@ async function update(userId: number, updateProductData: createProduct, productI
 	return updatedProduct;
 }
 
+async function remove(userId: number, productId: number) {
+	await userService.getById(userId);
+	const dbProductById = await productRepository.findById(productId);
+
+	if (!dbProductById) {
+		throw errorType.notFound("Product");
+	}
+	if (dbProductById.userId !== userId) {
+		throw errorType.forbbiden();
+	}
+
+	await productRepository.remove(productId);
+}
+
 export const productService = {
 	create,
 	update,
+	remove,
 };
