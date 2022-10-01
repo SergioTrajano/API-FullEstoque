@@ -8,4 +8,6 @@ const router = Router();
 
 router.post("/products", validateSchema(createProductSchema), productController.create);
 
+router.put("/products/:productId", productController.update);
+
 export default router;
