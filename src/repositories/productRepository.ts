@@ -23,7 +23,21 @@ async function findByBarcode(barcode: string, userId: number) {
 	return dbProduct;
 }
 
+async function findById(id: number) {
+	const dbProduct = await client.product.findUnique({ where: { id } });
+
+	return dbProduct;
+}
+
+async function update(updateProductData: createProduct, id: number) {
+	const updatedProduct = await client.product.update({ where: { id }, data: updateProductData });
+
+	return updatedProduct;
+}
+
 export const productRepository = {
 	create,
 	findByBarcode,
+	findById,
+	update,
 };
