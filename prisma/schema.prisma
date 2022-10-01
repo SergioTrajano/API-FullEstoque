@@ -54,6 +54,7 @@ model Product {
   purchases Purchase[]
   sells     Sell[]
 
+  @@unique([userId, barcode])
   @@map("products")
 }
 
