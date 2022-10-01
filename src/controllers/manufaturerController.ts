@@ -22,7 +22,17 @@ async function update(req: Request, res: Response) {
 	res.status(200).send(updatedManufacturer);
 }
 
+async function remove(req: Request, res: Response) {
+	const userId: number = res.locals.userId;
+	const manufacturerId = Number(req.params.manufacturerId);
+
+	await manufacturerService.remove(userId, manufacturerId);
+
+	res.sendStatus(200);
+}
+
 export const manufacturerController = {
 	create,
 	update,
+	remove,
 };
