@@ -12,4 +12,6 @@ router.put("/manufacturers/:manufacturerId", validateSchema(createManufacturerSc
 
 router.delete("/manufacturers/:manufacturerId", manufacturerController.remove);
 
+router.get("/manufacturers", manufacturerController.find);
+
 export default router;
