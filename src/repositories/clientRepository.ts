@@ -20,7 +20,21 @@ async function getByCPF(CPF: string, userId: number) {
 	return dbClient;
 }
 
+async function getById(id: number) {
+	const dbClient = await client.client.findUnique({ where: { id } });
+
+	return dbClient;
+}
+
+async function update(data: createClient, id: number) {
+	const updatedClient = await client.client.update({ data, where: { id } });
+
+	return updatedClient;
+}
+
 export const clientRepository = {
 	create,
 	getByCPF,
+	getById,
+	update,
 };
