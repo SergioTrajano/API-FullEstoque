@@ -10,4 +10,6 @@ router.post("/manufacturers", validateSchema(createManufacturerSchema), manufact
 
 router.put("/manufacturers/:manufacturerId", validateSchema(createManufacturerSchema), manufacturerController.update);
 
+router.delete("/manufacturers/:manufacturerId", manufacturerController.remove);
+
 export default router;
