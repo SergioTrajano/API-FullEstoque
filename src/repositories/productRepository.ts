@@ -35,9 +35,14 @@ async function update(updateProductData: createProduct, id: number) {
 	return updatedProduct;
 }
 
+async function remove(id: number) {
+	await client.product.delete({ where: { id } });
+}
+
 export const productRepository = {
 	create,
 	findByBarcode,
 	findById,
 	update,
+	remove,
 };
