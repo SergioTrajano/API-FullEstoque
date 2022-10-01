@@ -1,3 +1,4 @@
+import { Manufacturer } from "@prisma/client";
 import client from "../dbStrategy/postgres";
 
 export type createManufacture = {
@@ -10,13 +11,27 @@ async function create(newManufacturerData: createManufacture, userId: number) {
 	return newManufacturer;
 }
 
-async function getByName(name: string) {
-	const dbMaanufacturer = await client.manufacturer.findFirst({ where: { name } });
+async function getByName(name: string, userId: number) {
+	const dbMaanufacturer = await client.manufacturer.findFirst({ where: { name, userId } });
 
 	return dbMaanufacturer;
+}
+
+async function getById(id: number) {
+	const dbManufacturer: any = await client.manufacturer.findFirst({ where: { id } });
+
+	return dbManufacturer;
+}
+
+async function update(data: Partial<Manufacturer>, id: number) {
+	const updatedManufacturer = await client.manufacturer.update({ data: data, where: { id } });
+
+	return updatedManufacturer;
 }
 
 export const manufaturerRepository = {
 	create,
 	getByName,
+	getById,
+	update,
 };
