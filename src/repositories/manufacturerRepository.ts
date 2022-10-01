@@ -29,9 +29,14 @@ async function update(data: Partial<Manufacturer>, id: number) {
 	return updatedManufacturer;
 }
 
+async function remove(id: number) {
+	await client.manufacturer.delete({ where: { id } });
+}
+
 export const manufaturerRepository = {
 	create,
 	getByName,
 	getById,
 	update,
+	remove,
 };
