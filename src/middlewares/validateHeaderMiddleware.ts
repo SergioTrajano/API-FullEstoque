@@ -14,7 +14,7 @@ export default async function validateHeader(req: Request, res: Response, next: 
 	}
 
 	const token = String(req.headers.authorization?.replace("Bearer ", ""));
-	const userId = tokenManager.readToken(token);
+	const userId = await tokenManager.readToken(token);
 
 	res.locals.userId = Number(userId);
 

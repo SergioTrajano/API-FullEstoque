@@ -21,7 +21,7 @@ async function getByEmail(userData: Omit<User, "id" | "name">) {
 		throw errorType.unathorized("credentials!");
 	}
 
-	const token = tokenManager.generateToken(dbUser.id);
+	const token = await tokenManager.generateToken(dbUser.id);
 
 	return token;
 }

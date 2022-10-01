@@ -4,11 +4,11 @@ import { errorType } from "./errorTypes";
 
 const SECRET: string = String(process.env.JWT_SECRET);
 
-function generateToken(id: number) {
+async function generateToken(id: number) {
 	return jwt.sign(String(id), SECRET);
 }
 
-function readToken(token: string) {
+async function readToken(token: string) {
 	try {
 		return jwt.verify(token, SECRET) as { id: number };
 	} catch {
