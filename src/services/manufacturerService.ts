@@ -60,9 +60,20 @@ async function find(userId: number) {
 	return userManufacturers;
 }
 
+async function findById(id: number) {
+	const dbManufacture = await manufaturerRepository.getById(id);
+
+	if (!dbManufacture) {
+		throw errorType.notFound("Manufacture");
+	}
+
+	return dbManufacture;
+}
+
 export const manufacturerService = {
 	create,
 	update,
 	remove,
 	find,
+	findById,
 };

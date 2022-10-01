@@ -53,9 +53,20 @@ async function find(userId: number) {
 	return userCategories;
 }
 
+async function findById(id: number) {
+	const dbCategory = await categoryRepository.findById(id);
+
+	if (!dbCategory) {
+		throw errorType.notFound("Category");
+	}
+
+	return dbCategory;
+}
+
 export const categoryService = {
 	create,
 	update,
 	remove,
 	find,
+	findById,
 };
