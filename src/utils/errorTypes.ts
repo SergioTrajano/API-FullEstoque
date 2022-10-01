@@ -2,8 +2,8 @@ function unathorized(entity: string) {
 	return { code: 401, message: `Invalid ${entity}.` };
 }
 
-function forbbiden() {
-	return { code: 403, message: "Permission denied!" };
+function forbbiden(message?: string) {
+	return { code: 403, message: message || "Permission denied!" };
 }
 
 function notFound(entity: string) {
