@@ -17,9 +17,13 @@ async function create(newCategoryData: createCategory, id: number) {
 
 async function update(dataToUpdate: createCategory, categoryId: number, userId: number) {
 	const dbCategory = await categoryRepository.findById(categoryId);
+	const dbCategorybyName = await categoryRepository.findByUserIdAndName(dataToUpdate.name, userId);
 
 	if (!dbCategory) {
 		throw errorType.notFound("Category");
+	}
+	if (dbCategorybyName && categoryId !== dbCategorybyName.id) {
+		throw errorType.forbbiden();
 	}
 	if (dbCategory.userId !== userId) {
 		throw errorType.forbbiden();
