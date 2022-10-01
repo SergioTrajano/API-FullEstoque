@@ -10,4 +10,6 @@ router.post("/products", validateSchema(createProductSchema), productController.
 
 router.put("/products/:productId", productController.update);
 
+router.delete("/products/:productId", productController.remove);
+
 export default router;
