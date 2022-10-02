@@ -22,7 +22,17 @@ async function update(req: Request, res: Response) {
 	res.status(200).send(updatedClient);
 }
 
+async function remove(req: Request, res: Response) {
+	const userId = res.locals.userId;
+	const clientId = Number(req.params.clientId);
+
+	await clientService.remove(userId, clientId);
+
+	res.sendStatus(200);
+}
+
 export const clientController = {
 	create,
 	update,
+	remove,
 };
