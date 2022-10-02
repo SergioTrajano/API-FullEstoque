@@ -22,7 +22,17 @@ async function update(req: Request, res: Response) {
 	res.status(200).send(updatedPurchase);
 }
 
+async function remove(req: Request, res: Response) {
+	const userId = res.locals.userId;
+	const purchaseId: number = Number(req.params.purchaseId);
+
+	await purchaseService.remove(userId, purchaseId);
+
+	res.sendStatus(200);
+}
+
 export const purchaseController = {
 	create,
 	update,
+	remove,
 };
