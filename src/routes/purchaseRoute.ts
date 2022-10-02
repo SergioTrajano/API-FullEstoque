@@ -8,4 +8,6 @@ const router = Router();
 
 router.post("/purchases", validateSchema(createPurchaseSchema), purchaseController.create);
 
+router.put("/purchases/:purchaseId", validateSchema(createPurchaseSchema), purchaseController.update);
+
 export default router;
