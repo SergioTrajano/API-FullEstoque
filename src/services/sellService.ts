@@ -47,7 +47,23 @@ async function update(dataToUpdate: createSell, userId: number, sellId: number) 
 	return updatedSell;
 }
 
+async function remove(userId: number, sellId: number) {
+	await userService.getById(userId);
+
+	const dbSell = await sellRepository.findById(sellId);
+
+	if (!dbSell) {
+		throw errorType.notFound("Sell");
+	}
+	if (dbSell.userId !== userId) {
+		throw errorType.forbbiden("Unathorized sell");
+	}
+
+	await sellRepository.remove(sellId);
+}
+
 export const sellService = {
 	create,
 	update,
+	remove,
 };
