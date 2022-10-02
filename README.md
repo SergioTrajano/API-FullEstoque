@@ -131,11 +131,11 @@ POST /products (authenticated)
     - headers: { "Authorization": "Bearer $token" }
     - body: {
         "categoryId": 1,
-	      "name": "lorem",
-	      "description": "loremIpsum",
-	      "barcode": "123456879",
-	      "price": 5.20,
-	      "manufacturerId": 1
+	"name": "lorem",
+	"description": "loremIpsum",
+	"barcode": "123456879",
+	"price": 5.20,
+	"manufacturerId": 1
     }
 ```
 
@@ -145,11 +145,11 @@ PUT /products/:productId (authenticated)
     - headers: { "Authorization": "Bearer $token" }
     - body: {
         "categoryId": 1,
-	      "name": "lorem",
-	      "description": "loremIpsum",
-	      "barcode": "123456879",
-	      "price": 5.20,
-	      "manufacturerId": 1
+	"name": "lorem",
+	"description": "loremIpsum",
+	"barcode": "123456879",
+	"price": 5.20,
+	"manufacturerId": 1
     }
 ``` 
 
