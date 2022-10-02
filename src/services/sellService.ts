@@ -22,6 +22,32 @@ async function create(newSellData: createSell, userId: number) {
 	return newSell;
 }
 
+async function update(dataToUpdate: createSell, userId: number, sellId: number) {
+	await userService.getById(userId);
+
+	const dbSell = await sellRepository.findById(sellId);
+	const dbProduct = await productService.findById(dataToUpdate.productId);
+	const dbClient = await clientService.findById(dataToUpdate.clientId);
+
+	if (!dbSell) {
+		throw errorType.notFound("Sell");
+	}
+	if (dbSell.userId !== userId) {
+		throw errorType.forbbiden("Unathorized sell");
+	}
+	if (dbProduct.userId !== userId) {
+		throw errorType.forbbiden("Unathorized product");
+	}
+	if (dbClient.userId !== userId) {
+		throw errorType.forbbiden("unathorized client");
+	}
+
+	const updatedSell = await sellRepository.update(dataToUpdate, sellId);
+
+	return updatedSell;
+}
+
 export const sellService = {
 	create,
+	update,
 };
