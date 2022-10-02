@@ -12,4 +12,6 @@ router.put("/clients/:clientId", validateSchema(createClientSchema), clientContr
 
 router.delete("/clients/:clientId", clientController.remove);
 
+router.get("/clients", clientController.find);
+
 export default router;
