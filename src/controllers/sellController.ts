@@ -22,7 +22,17 @@ async function update(req: Request, res: Response) {
 	res.status(200).send(updatedSell);
 }
 
+async function remove(req: Request, res: Response) {
+	const userId: number = res.locals.userId;
+	const sellId = Number(req.params.sellId);
+
+	await sellService.remove(userId, sellId);
+
+	res.sendStatus(200);
+}
+
 export const sellController = {
 	create,
 	update,
+	remove,
 };
