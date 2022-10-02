@@ -31,9 +31,16 @@ async function remove(id: number) {
 	await client.sell.delete({ where: { id } });
 }
 
+async function find(userId: number) {
+	const dbSells = await client.sell.findMany({ where: { userId } });
+
+	return dbSells;
+}
+
 export const sellRepository = {
 	create,
 	update,
 	findById,
 	remove,
+	find,
 };
