@@ -12,4 +12,6 @@ router.put("/purchases/:purchaseId", validateSchema(createPurchaseSchema), purch
 
 router.delete("/purchases/:purchaseId", purchaseController.remove);
 
+router.get("/purchases", purchaseController.find);
+
 export default router;
