@@ -31,9 +31,16 @@ async function remove(id: number) {
 	await client.purchase.delete({ where: { id } });
 }
 
+async function find(userId: number) {
+	const dbPurchases = await client.purchase.findMany({ where: { userId } });
+
+	return dbPurchases;
+}
+
 export const purchaseRepository = {
 	create,
 	findById,
 	update,
 	remove,
+	find,
 };
