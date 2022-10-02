@@ -6,6 +6,7 @@ import manufacturerRoute from "./manufacturerRoute";
 import productRoute from "./productRoute";
 import clientRouter from "./clientRoute";
 import purchaseRouter from "./purchaseRoute";
+import sellRouter from "./sellRoute";
 
 import validateHeader from "../middlewares/validateHeaderMiddleware";
 
@@ -20,5 +21,6 @@ router.use(manufacturerRoute);
 router.use(productRoute);
 router.use(clientRouter);
 router.use(purchaseRouter);
+router.use(sellRouter);
 
 export default router;
