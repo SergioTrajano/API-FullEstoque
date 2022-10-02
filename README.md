@@ -130,10 +130,10 @@ POST /products (authenticated)
     - Route to create a product
     - headers: { "Authorization": "Bearer $token" }
     - body: {
-        "categoryId": 1,
-	"name": "lorem",
-	"description": "loremIpsum",
-	"barcode": "123456879",
+        "name": "loremIpsum",
+	"categoryId": 1,
+	"description": "lorem",
+	"barcode": "12345678912",
 	"price": 5.20,
 	"manufacturerId": 1
     }
@@ -144,10 +144,10 @@ PUT /products/:productId (authenticated)
     - Route to update products
     - headers: { "Authorization": "Bearer $token" }
     - body: {
-        "categoryId": 1,
-	"name": "lorem",
-	"description": "loremIpsum",
-	"barcode": "123456879",
+        "name": "loremIpsum",
+	"categoryId": 1,
+	"description": "lorem",
+	"barcode": "12345678912",
 	"price": 5.20,
 	"manufacturerId": 1
     }
