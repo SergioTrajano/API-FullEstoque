@@ -31,8 +31,17 @@ async function remove(req: Request, res: Response) {
 	res.sendStatus(200);
 }
 
+async function find(req: Request, res: Response) {
+	const userId = res.locals.userId;
+
+	const userPurchases = await purchaseService.find(userId);
+
+	res.status(200).send(userPurchases);
+}
+
 export const purchaseController = {
 	create,
 	update,
 	remove,
+	find,
 };
