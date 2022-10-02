@@ -1,5 +1,6 @@
 import { Purchase } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime";
+import { when } from "joi";
 import client from "../dbStrategy/postgres";
 
 export type createPurchase = {
@@ -26,8 +27,13 @@ async function update(data: createPurchase, id: number) {
 	return updatedPurchase;
 }
 
+async function remove(id: number) {
+	await client.purchase.delete({ where: { id } });
+}
+
 export const purchaseRepository = {
 	create,
 	findById,
 	update,
+	remove,
 };
