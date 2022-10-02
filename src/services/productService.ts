@@ -75,9 +75,20 @@ async function find(userId: number) {
 	return userProducts;
 }
 
+async function findById(id: number) {
+	const dbProduct = await productRepository.findById(id);
+
+	if (!dbProduct) {
+		throw errorType.notFound("Product");
+	}
+
+	return dbProduct;
+}
+
 export const productService = {
 	create,
 	update,
 	remove,
 	find,
+	findById,
 };
