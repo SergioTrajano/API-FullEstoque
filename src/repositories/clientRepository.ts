@@ -32,9 +32,14 @@ async function update(data: createClient, id: number) {
 	return updatedClient;
 }
 
+async function remove(id: number) {
+	await client.client.delete({ where: { id } });
+}
+
 export const clientRepository = {
 	create,
 	getByCPF,
 	getById,
 	update,
+	remove,
 };
