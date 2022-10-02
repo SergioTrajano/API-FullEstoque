@@ -10,4 +10,6 @@ router.post("/clients", validateSchema(createClientSchema), clientController.cre
 
 router.put("/clients/:clientId", validateSchema(createClientSchema), clientController.update);
 
+router.delete("/clients/:clientId", clientController.remove);
+
 export default router;
