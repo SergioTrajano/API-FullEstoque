@@ -51,8 +51,15 @@ async function remove(userId: number, clientId: number) {
 	await clientRepository.remove(clientId);
 }
 
+async function find(userId: number) {
+	const userClients = await clientRepository.find(userId);
+
+	return userClients;
+}
+
 export const clientService = {
 	create,
 	update,
 	remove,
+	find,
 };
