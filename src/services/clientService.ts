@@ -37,7 +37,22 @@ async function update(updateClient: createClient, userId: number, clientId: numb
 	return updatedClient;
 }
 
+async function remove(userId: number, clientId: number) {
+	await userService.getById(userId);
+	const dbClient = await clientRepository.getById(clientId);
+
+	if (!dbClient) {
+		throw errorType.notFound("Client");
+	}
+	if (dbClient.userId !== userId) {
+		throw errorType.forbbiden();
+	}
+
+	await clientRepository.remove(clientId);
+}
+
 export const clientService = {
 	create,
 	update,
+	remove,
 };
