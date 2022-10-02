@@ -17,6 +17,28 @@ async function create(newPurchaseData: createPurchase, userId: number) {
 	return { ...newPurchase, totalPrice: Number(newPurchase.totalPrice) };
 }
 
+async function update(dataToUpdate: createPurchase, userId: number, purchaseId: number) {
+	await userService.getById(userId);
+
+	const dbPurchase = await purchaseRepository.findById(purchaseId);
+	const dbProduct = await productService.findById(dataToUpdate.productId);
+
+	if (!dbPurchase) {
+		throw errorType.notFound("Purchase");
+	}
+	if (dbPurchase.userId !== userId) {
+		throw errorType.forbbiden("Unathorized purchase");
+	}
+	if (dbProduct.userId !== userId) {
+		throw errorType.forbbiden("Unathorized product id");
+	}
+
+	const updatedPurchase = await purchaseRepository.update(dataToUpdate, purchaseId);
+
+	return { ...updatedPurchase, totalPrice: Number(updatedPurchase.totalPrice) };
+}
+
 export const purchaseService = {
 	create,
+	update,
 };
