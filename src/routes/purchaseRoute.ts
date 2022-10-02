@@ -10,4 +10,6 @@ router.post("/purchases", validateSchema(createPurchaseSchema), purchaseControll
 
 router.put("/purchases/:purchaseId", validateSchema(createPurchaseSchema), purchaseController.update);
 
+router.delete("/purchases/:purchaseId", purchaseController.remove);
+
 export default router;
