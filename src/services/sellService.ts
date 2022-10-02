@@ -62,8 +62,17 @@ async function remove(userId: number, sellId: number) {
 	await sellRepository.remove(sellId);
 }
 
+async function find(userId: number) {
+	await userService.getById(userId);
+
+	const userSells = await sellRepository.find(userId);
+
+	return userSells;
+}
+
 export const sellService = {
 	create,
 	update,
 	remove,
+	find,
 };
