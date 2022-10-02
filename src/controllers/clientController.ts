@@ -31,8 +31,17 @@ async function remove(req: Request, res: Response) {
 	res.sendStatus(200);
 }
 
+async function find(req: Request, res: Response) {
+	const userId = res.locals.userId;
+
+	const userClients = await clientService.find(userId);
+
+	res.status(200).send(userClients);
+}
+
 export const clientController = {
 	create,
 	update,
 	remove,
+	find,
 };
