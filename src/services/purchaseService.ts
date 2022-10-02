@@ -53,8 +53,17 @@ async function remove(userId: number, purchaseId: number) {
 	await purchaseRepository.remove(purchaseId);
 }
 
+async function find(userId: number) {
+	await userService.getById(userId);
+
+	const userPurchases = await purchaseRepository.find(userId);
+
+	return userPurchases;
+}
+
 export const purchaseService = {
 	create,
 	update,
 	remove,
+	find,
 };
