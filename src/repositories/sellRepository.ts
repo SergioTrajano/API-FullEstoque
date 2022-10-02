@@ -15,6 +15,20 @@ async function create(data: Omit<Sell, "id" | "createdAt">) {
 	return { ...newSell, totalPrice: Number(newSell.totalPrice) };
 }
 
+async function findById(id: number) {
+	const dbSell = await client.sell.findUnique({ where: { id } });
+
+	return dbSell;
+}
+
+async function update(data: createSell, id: number) {
+	const updatedSell = await client.sell.update({ data, where: { id } });
+
+	return updatedSell;
+}
+
 export const sellRepository = {
 	create,
+	update,
+	findById,
 };
