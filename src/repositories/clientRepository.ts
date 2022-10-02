@@ -36,10 +36,17 @@ async function remove(id: number) {
 	await client.client.delete({ where: { id } });
 }
 
+async function find(userId: number) {
+	const dbUserClients = await client.client.findMany({ where: { userId } });
+
+	return dbUserClients;
+}
+
 export const clientRepository = {
 	create,
 	getByCPF,
 	getById,
 	update,
 	remove,
+	find,
 };
