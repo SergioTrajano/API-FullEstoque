@@ -57,9 +57,20 @@ async function find(userId: number) {
 	return userClients;
 }
 
+async function findById(id: number) {
+	const dbClient = await clientRepository.getById(id);
+
+	if (!dbClient) {
+		throw errorType.notFound("Client");
+	}
+
+	return dbClient;
+}
+
 export const clientService = {
 	create,
 	update,
 	remove,
 	find,
+	findById,
 };
