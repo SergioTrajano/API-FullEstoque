@@ -8,4 +8,6 @@ const router = Router();
 
 router.post("/sells", validateSchema(createSellSchema), sellController.create);
 
+router.put("/sells/:sellId", validateSchema(createSellSchema), sellController.update);
+
 export default router;
