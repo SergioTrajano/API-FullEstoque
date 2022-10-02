@@ -31,8 +31,17 @@ async function remove(req: Request, res: Response) {
 	res.sendStatus(200);
 }
 
+async function find(req: Request, res: Response) {
+	const userId: number = res.locals.userId;
+
+	const userSells = await sellService.find(userId);
+
+	res.status(200).send(userSells);
+}
+
 export const sellController = {
 	create,
 	update,
 	remove,
+	find,
 };
