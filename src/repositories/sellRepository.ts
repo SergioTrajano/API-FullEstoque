@@ -27,8 +27,13 @@ async function update(data: createSell, id: number) {
 	return updatedSell;
 }
 
+async function remove(id: number) {
+	await client.sell.delete({ where: { id } });
+}
+
 export const sellRepository = {
 	create,
 	update,
 	findById,
+	remove,
 };
