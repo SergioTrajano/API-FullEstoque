@@ -10,4 +10,6 @@ router.post("/sells", validateSchema(createSellSchema), sellController.create);
 
 router.put("/sells/:sellId", validateSchema(createSellSchema), sellController.update);
 
+router.delete("/sells/:sellId", sellController.remove);
+
 export default router;
