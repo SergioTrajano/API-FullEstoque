@@ -12,4 +12,6 @@ router.put("/sells/:sellId", validateSchema(createSellSchema), sellController.up
 
 router.delete("/sells/:sellId", sellController.remove);
 
+router.get("/sells", sellController.find);
+
 export default router;
