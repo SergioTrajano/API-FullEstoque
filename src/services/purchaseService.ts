@@ -38,7 +38,23 @@ async function update(dataToUpdate: createPurchase, userId: number, purchaseId: 
 	return { ...updatedPurchase, totalPrice: Number(updatedPurchase.totalPrice) };
 }
 
+async function remove(userId: number, purchaseId: number) {
+	await userService.getById(userId);
+
+	const dbPurchase = await purchaseRepository.findById(purchaseId);
+
+	if (!dbPurchase) {
+		throw errorType.notFound("Purchase");
+	}
+	if (dbPurchase.userId !== userId) {
+		throw errorType.forbbiden("Unathorized purchase");
+	}
+
+	await purchaseRepository.remove(purchaseId);
+}
+
 export const purchaseService = {
 	create,
 	update,
+	remove,
 };
