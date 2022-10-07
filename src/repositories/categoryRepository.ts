@@ -11,7 +11,15 @@ async function create(newCategoryData: createCategory, userId: number) {
 }
 
 async function findByUserIdAndName(name: string, id: number) {
-	const userCategory = await client.category.findFirst({ where: { name: name, userId: id } });
+	const userCategory = await client.category.findFirst({
+		where: {
+			name: {
+				equals: name,
+				mode: "insensitive",
+			},
+			userId: id,
+		},
+	});
 
 	return userCategory;
 }

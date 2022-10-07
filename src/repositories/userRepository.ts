@@ -18,7 +18,14 @@ async function changePassword(id: number, newPassword: string) {
 }
 
 async function getByEmail(email: string) {
-	const dbUser = await client.user.findUnique({ where: { email } });
+	const dbUser = await client.user.findFirst({
+		where: {
+			email: {
+				equals: email,
+				mode: "insensitive",
+			},
+		},
+	});
 
 	return dbUser;
 }

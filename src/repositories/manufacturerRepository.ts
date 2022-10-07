@@ -12,7 +12,15 @@ async function create(newManufacturerData: createManufacture, userId: number) {
 }
 
 async function getByName(name: string, userId: number) {
-	const dbMaanufacturer = await client.manufacturer.findFirst({ where: { name, userId } });
+	const dbMaanufacturer = await client.manufacturer.findFirst({
+		where: {
+			name: {
+				equals: name,
+				mode: "insensitive",
+			},
+			userId,
+		},
+	});
 
 	return dbMaanufacturer;
 }
