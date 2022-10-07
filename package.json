@@ -5,8 +5,9 @@
 	"main": "app.js",
 	"scripts": {
 		"dev": "nodemon ./src/app.ts",
-		"test:integration": "dotenv -e .env.tests jest -i --no--cache --testPathPattern=tests/integration",
-		"test:migrate": "dotenv -e .env.tests npx prisma migrate dev"
+		"test:integration": "dotenv -e .env.tests npx prisma migrate dev && dotenv -e .env.tests jest -i --no--cache --testPathPattern=tests/integration",
+		"build": "tsc",
+		"start": "node dist/src/app.js"
 	},
 	"keywords": [],
 	"author": "",
