@@ -63,9 +63,9 @@ model Client {
   userId      Int
   user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   name        String
-  phoneNumber Int
+  phoneNumber String
   CPF         String
-  RG          Int
+  RG          String
 
   sells Sell[]
 
