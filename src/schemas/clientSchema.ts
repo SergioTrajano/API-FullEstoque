@@ -2,7 +2,7 @@ import joi from "joi";
 
 export const createClientSchema = joi.object({
 	name: joi.string().trim().required(),
-	phoneNumber: joi.number().integer().required().strict(),
+	phoneNumber: joi.string().trim().required(),
 	CPF: joi.string().trim().required(),
-	RG: joi.number().integer().required().strict(),
+	RG: joi.string().trim().required(),
 });
