@@ -3,9 +3,9 @@ import client from "../dbStrategy/postgres";
 
 export type createClient = {
 	name: string;
-	phoneNumber: number;
+	phoneNumber: string;
 	CPF: string;
-	RG: number;
+	RG: string;
 };
 
 async function create(data: Omit<Client, "id">) {
