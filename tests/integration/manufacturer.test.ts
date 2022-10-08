@@ -8,7 +8,13 @@ import { faker } from "@faker-js/faker";
 const app = supertest(server);
 
 beforeEach(async () => {
-	await client.$executeRaw`TRUNCATE TABLE users CASCADE`;
+	await client.$executeRaw`TRUNCATE TABLE categories RESTART IDENTITY CASCADE`;
+	await client.$executeRaw`TRUNCATE TABLE manufacturers RESTART IDENTITY CASCADE`;
+	await client.$executeRaw`TRUNCATE TABLE clients RESTART IDENTITY CASCADE`;
+	await client.$executeRaw`TRUNCATE TABLE products RESTART IDENTITY CASCADE`;
+	await client.$executeRaw`TRUNCATE TABLE purchases RESTART IDENTITY CASCADE`;
+	await client.$executeRaw`TRUNCATE TABLE sells RESTART IDENTITY CASCADE`;
+	await client.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`;
 });
 
 afterAll(async () => {

@@ -45,7 +45,7 @@ model Product {
   categoryId     Int
   category       Category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   name           String
-  description    String
+  description    String?
   barcode        String
   price          Decimal      @db.Decimal(7, 2)
   manufacturerId Int

@@ -15,4 +15,5 @@ module.exports = {
 		"<rootDir>/src/config",
 		"<rootDir>/tests/factory.ts",
 	],
+	testTimeout: 300000,
 };

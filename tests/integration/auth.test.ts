@@ -8,7 +8,7 @@ import { faker } from "@faker-js/faker";
 const app = supertest(server);
 
 beforeEach(async () => {
-	await client.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY`;
+	await client.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`;
 });
 
 afterAll(async () => {
