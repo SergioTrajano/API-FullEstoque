@@ -40,7 +40,28 @@ async function remove(id: number) {
 }
 
 async function find(userId: number) {
-	const userProducts = await client.product.findMany({ where: { userId } });
+	const userProducts = await client.product.findMany({
+		where: { userId },
+		select: {
+			id: true,
+			name: true,
+			description: true,
+			barcode: true,
+			price: true,
+			category: {
+				select: {
+					id: true,
+					name: true,
+				},
+			},
+			manufacturer: {
+				select: {
+					id: true,
+					name: true,
+				},
+			},
+		},
+	});
 
 	return userProducts;
 }

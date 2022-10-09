@@ -32,7 +32,26 @@ async function remove(id: number) {
 }
 
 async function find(userId: number) {
-	const dbPurchases = await client.purchase.findMany({ where: { userId } });
+	const dbPurchases = await client.purchase.findMany({
+		where: { userId },
+		select: {
+			id: true,
+			quantity: true,
+			totalPrice: true,
+			product: {
+				select: {
+					id: true,
+					name: true,
+					manufacturer: {
+						select: {
+							name: true,
+						},
+					},
+				},
+			},
+		},
+		orderBy: [{ id: "desc" }],
+	});
 
 	return dbPurchases;
 }
