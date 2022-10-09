@@ -1,11 +1,12 @@
 import { faker } from "@faker-js/faker";
+import { Manufacturer } from "@prisma/client";
 import client from "../src/dbStrategy/postgres";
 import { encryptPassword } from "../src/utils/passwordEncrypter";
 import { tokenManager } from "../src/utils/tokenManager";
 
 async function createUser(bool: boolean) {
 	const password = faker.internet.password(10) + "@1At";
-	const user = {
+	let user: any = {
 		email: faker.internet.email(),
 		password,
 		confirmPassword: password,
@@ -13,31 +14,35 @@ async function createUser(bool: boolean) {
 	};
 
 	if (bool) {
-		await client.user.create({
+		const dbUser = await client.user.create({
 			data: { email: user.email, name: user.name, password: encryptPassword(user.password) },
 		});
+		user = { ...dbUser, password: user.password };
 	}
 
 	return user;
 }
 
-async function createManufacturer(bool: boolean) {
-	const newManufacturer = {
-		name: faker.company.name(),
-	};
+async function createManufacturer(bool: boolean, id: number) {
+	const newManufacturer = { name: faker.company.name(), id: 0 };
+
+	if (bool) {
+		const dbMaanufacturer = await client.manufacturer.create({
+			data: { name: newManufacturer.name, userId: id },
+		});
+
+		return dbMaanufacturer;
+	}
 
 	return newManufacturer;
 }
 
 async function createToken() {
-	const user = await createUser(false);
-	const userData = await client.user.create({
-		data: { email: user.email, name: user.name, password: encryptPassword(user.password) },
-	});
+	const user = await createUser(true);
 
-	const token = await tokenManager.generateToken(userData.id);
+	const token = await tokenManager.generateToken(user.id);
 
-	return token;
+	return { token, id: user.id };
 }
 
 export const factory = {
