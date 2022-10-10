@@ -14,6 +14,7 @@ module.exports = {
 		"<rootDir>/src/utils",
 		"<rootDir>/src/config",
 		"<rootDir>/tests/factory.ts",
+		"<rootDir>/src/dbStrategy",
 	],
 	testTimeout: 300000,
 };
